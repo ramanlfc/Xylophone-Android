@@ -1,5 +1,6 @@
 package com.example.raman.xylophone;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,5 +36,45 @@ public class MainActivity extends AppCompatActivity {
 
     public void playNote(View view) {
 
+        int viewId = view.getId();
+
+        switch (viewId) {
+            case R.id.note1Button:
+                playSound(R.raw.note1_c);
+                break;
+            case R.id.note2Button:
+                playSound(R.raw.note2_d);
+                break;
+            case R.id.note3Button:
+                playSound(R.raw.note3_e);
+                break;
+            case R.id.note4Button:
+                playSound(R.raw.note4_f);
+                break;
+            case R.id.note5Button:
+                playSound(R.raw.note5_g);
+                break;
+            case R.id.note6Button:
+                playSound(R.raw.note6_a);
+                break;
+            case R.id.note7Button:
+                playSound(R.raw.note7_b);
+                break;
+        }
+
     }
+
+    private void playSound(int resId) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, resId);
+        mediaPlayer.start();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+        }); // end setOnCompletionListener
+    }
+
 }
